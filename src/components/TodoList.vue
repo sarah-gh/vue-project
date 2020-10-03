@@ -43,5 +43,6 @@ export default {
   .myflex{
   width: 98%;
   }
+  
 }
 </style>
