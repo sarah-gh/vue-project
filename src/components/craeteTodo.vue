@@ -1,10 +1,5 @@
 <template>
-  <div id="app" class=" container">
-    <h1 class=" h1"> Todo List </h1>
-    <TodoList v-bind:todos="todos" />
-    <!-- <craeteTodo v-on:add-todo="addTodo" /> -->
-    <!-- <craete-todo v-on:add-todo="addTodo" ></craete-todo> -->
-    <div class='ui basic content center aligned segment'>
+  <div class='ui basic content center aligned segment'>
     <button class='ui basic button icon' v-on:click="openForm" v-show="!isCreating">
       <i class='plus icon'></i>
     </button>
@@ -13,12 +8,12 @@
         <div class='ui form'>
           <div class='field'>
             <label>Title</label>
-            <p class="my-p"> {{ error_a }}</p>
+            <p> {{ error_a }}</p>
             <input v-model="titleText" type='text' ref='title' defaultValue="">
           </div>
           <div class='field'>
             <label>Project</label>
-            <p class="my-p"> {{ error_b }} </p>
+            <p> {{ error_b }} </p>
             <input v-model="projectText" type='text' ref='project' defaultValue="">
           </div>
           <div class='ui two button attached buttons'>
@@ -33,41 +28,12 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
-import TodoList from './components/TodoList.vue'  
-// import craeteTodo from '@/components/craeteTodo.vue'
 export default {
-  name: 'App',
-  components: {
-    TodoList,
-    // craeteTodo
-  },
-   data() {
+  data() {
     return {
-      todos: [{
-        title: 'Todo A',
-        project: 'Project A',
-        done: false,
-        Complete : 'Pending',
-      }, {
-        title: 'Todo B',
-        project: 'Project B',
-        done: true,
-        Complete : 'Completed'
-      }, {
-        title: 'Todo C',
-        project: 'Project C',
-        done: false,
-        Complete : 'Pending'
-      }, {
-        title: 'Todo D',
-        project: 'Project D',
-        done: false,
-        Complete : 'Pending'
-      }],
       titleText: '',
       projectText: '',
       isCreating: false,
@@ -76,14 +42,6 @@ export default {
     };
   },
   methods: {
-    addTodo(mytitle,myproject) {
-      this.todos.push({
-        title : mytitle,
-        project : myproject,
-        done: false,
-        Complete : 'Pending'
-      });
-    },
     openForm() {
       this.isCreating = true;
       this.error_a = '';
@@ -109,15 +67,9 @@ export default {
       else if (this.titleText.length > 0 && this.projectText.length > 0) {
         let mytitle = this.titleText;
         let myproject = this.projectText;
-        // this.$emit('add-todo', {
-        //   mytitle,
-        //   myproject,
-        // });
-        this.todos.push({
-          title : mytitle,
-          project : myproject,
-          done: false,
-          Complete : 'Pending'
+        this.$emit('add-todo', {
+          mytitle,
+          myproject,
         });
       
         // todo.title,
@@ -134,19 +86,11 @@ export default {
       
     },
   },
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-.my-p{
+<style scoped>
+p{
   font-size: 10px;
   color: red;
 }
